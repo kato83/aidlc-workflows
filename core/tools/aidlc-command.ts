@@ -186,6 +186,7 @@ export function nextFlagTakesFollowing(flag: string, following: string | undefin
  */
 export const UNIT_VERBS: ReadonlyMap<string, boolean> = new Map([
   ["adopt", true],
+  ["assign", false],
   ["claim", true],
   ["gate", true],
   ["land", true],
