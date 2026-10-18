@@ -979,6 +979,8 @@ export interface DoneDirective {
   narration?: NarrationField;
   reason: string;
   workflow_continues?: true;
+  // For the agent: a Unit's build not pushed yet, and the command for the person's "push".
+  done_note?: string;
 }
 
 // parked - the workflow was intentionally parked mid-flow (a human resumes it
@@ -1010,6 +1012,8 @@ export interface NoticeDirective {
   message: string;
   /** The claimed Unit the notice says is complete and approved in this checkout. */
   unit?: string;
+  // For the agent: the commands for what the person may say back to the board.
+  board_note?: string;
 }
 
 // The Directive union — the engine emits exactly one of these per `next`.
@@ -1246,9 +1250,9 @@ const PRINT_FIELDS = [
   "kind", "message", "next_stage", "document_note", "revision_cycle", "accept_as_is", "question_id",
 ] as const;
 const ERROR_FIELDS = ["kind", "message"] as const;
-const DONE_FIELDS = ["kind", "reason", "workflow_continues"] as const;
+const DONE_FIELDS = ["kind", "reason", "workflow_continues", "done_note"] as const;
 const PARKED_FIELDS = ["kind", "reason", "stage"] as const;
-const NOTICE_FIELDS = ["kind", "message", "unit"] as const;
+const NOTICE_FIELDS = ["kind", "message", "unit", "board_note"] as const;
 
 // `narration` is legal on EVERY kind, so it is folded into each allowed-key set
 // centrally rather than repeated in eleven literals. A presentation field carries no
@@ -2389,6 +2393,7 @@ export function validateDirective(obj: unknown): ValidationResult {
     case "done":
       checkString(o, "reason", kind, errors);
       checkOptionalTrue(o, "workflow_continues", kind, errors);
+      if (o.done_note !== undefined) checkString(o, "done_note", kind, errors);
       break;
     case "parked":
       checkString(o, "reason", kind, errors);
@@ -2397,6 +2402,7 @@ export function validateDirective(obj: unknown): ValidationResult {
     case "notice":
       checkString(o, "message", kind, errors);
       checkOptionalString(o, "unit", kind, errors);
+      if (o.board_note !== undefined) checkString(o, "board_note", kind, errors);
       break;
     // No default: the union is exhaustive — every member of DirectiveKind has a
     // case above. TS flags a missing case at compile time if a kind is added.
