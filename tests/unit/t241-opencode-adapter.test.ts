@@ -162,6 +162,8 @@ function copyCore(root: string, relativePath: string): void {
       "aidlc-review-manifest.ts",
       "aidlc-command.ts",
       "aidlc-color.ts",
+      "aidlc-workspace-manifest.ts",
+      "aidlc-unit-teams.ts",
     ]) {
       copyFileSync(
         join(REPO_ROOT, "core", "tools", dependency),
