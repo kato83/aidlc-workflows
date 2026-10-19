@@ -128,6 +128,7 @@ import {
   DEFAULT_SPACE,
   isGitRepoDir,
   repoDir,
+  resolveWorkflowSelection,
   selectIntentForSession,
   sessionsDir,
   setActiveSpaceCursor,
@@ -5298,7 +5299,7 @@ function takeUnit(args: string[], projectDir?: string): void {
   const existing = findUnitBuild(pd, home.uuid, unit);
   if (existing !== null) {
     setActiveSpaceCursor(pd, existing.space);
-    selectIntentForSession(pd, existing.dirName, existing.space);
+    selectIntentForSession(pd, existing.dirName, existing.space, resolveWorkflowSelection(pd).sessionId ?? undefined);
     console.log(JSON.stringify({
       taken: true,
       resumed: true,
@@ -6693,7 +6694,7 @@ function takeFromFile(pd: string, path: string): void {
   const existing = findUnitBuild(pd, home.uuid, unit);
   if (existing !== null) {
     setActiveSpaceCursor(pd, existing.space);
-    selectIntentForSession(pd, existing.dirName, existing.space);
+    selectIntentForSession(pd, existing.dirName, existing.space, resolveWorkflowSelection(pd).sessionId ?? undefined);
     console.log(JSON.stringify({ taken: true, resumed: true, unit, space: existing.space, record: existing.dirName,
       notice: `Carrying on ${unit}, the ${existing.space} team's build here.` }));
     return;
