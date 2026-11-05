@@ -293,9 +293,6 @@ import {
   harnessDirectiveLimit,
   installedKiroLayout,
   intentRepos,
-  repoDir,
-  discoverSiblingRepos,
-  teamSkeletonOn,
   codekbStoreIsCurrent,
   inspectContinuationCursor,
   isPerUnitStage,
@@ -534,7 +531,6 @@ import {
   withTypedSpacing,
   writeActiveDirectiveMarker,
   writeEngineFileNoFollow,
-  ANSWER_TEXT_DIR,
   type PlanApprovalLegacyOfferCandidate,
   workspaceCommandUtilityArgv,
   workspaceRecordExists,
@@ -5478,6 +5474,9 @@ function unitsReposAsk(projectDir: string, stateContent: string | null): AskDire
         command: `${orchestrate} next --stage units-generation`,
       },
     ],
+  };
+}
+
 // Who builds which Unit, asked once at the home after the person chose teams,
 // before any Unit starts: the person answers in their own words and the agent
 // records them as one claim per named Unit; a Unit left out stays open for any
