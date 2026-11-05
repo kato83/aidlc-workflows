@@ -596,6 +596,7 @@ import {
   switchSoloToTeams,
   cachedUnitClaimOverview,
   checkTeamResults,
+  homeResultsPastUnitStages,
   localUnitClaimOverviewForIntent,
   openingStatusFrom,
   pushRemotesToPick,
@@ -13731,6 +13732,10 @@ function routeNext(agentArgs: string[], projectDir: string | undefined): void {
     ));
     return;
   }
+
+  // A home past every Unit stage while teams build: said on whichever step runs.
+  const pastUnitStages = stateContent ? homeResultsPastUnitStages(pd, stateContent, engineSessionId) : null;
+  if (pastUnitStages !== null) sayWithStepOnce(pd, pastUnitStages);
 
   // If the current stage is still in-flight (pending / in-progress /
   // awaiting-approval / revising), the next move is normally to run THAT stage
