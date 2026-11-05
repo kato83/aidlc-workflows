@@ -13648,7 +13648,7 @@ function routeNext(agentArgs: string[], projectDir: string | undefined): void {
         const dag = resolveBoltBatches(pd);
         const unitWorkLeft = dag.state === "ok" &&
           dag.batches.flat().some((unit) => !model.mergedUnits.has(unit));
-        if (board.awaitingMerge.length > 0 || (unitWorkLeft && cachedClaimFanoutActive(pd))) {
+        if (board.awaitingMerge.length > 0 || (unitWorkLeft && cachedClaimFanoutActive(pd, stateContent))) {
           emit(noticeDirective(
             renderTeamConstructionBoard(board, "dispatcher"),
           ));
