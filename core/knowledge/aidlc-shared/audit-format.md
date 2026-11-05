@@ -49,7 +49,7 @@ latest), so the row's words and its ids match. A row that stands on one
 message, or on the one the conductor named with `--message`, carries
 `Message Id` alone.
 
-## Event Registry (131 events, 27 categories)
+## Event Registry (135 events, 27 categories)
 
 ### Workflow Lifecycle (8 events)
 
@@ -73,7 +73,7 @@ message, or on the one the conductor named with `--message`, carries
 | `PHASE_VERIFIED` | Traceability check at boundary | Timestamp, Phase boundary, Pass/fail, Issues | `tools/aidlc-state.ts advance`, `tools/aidlc-state.ts complete-workflow` |
 | `PHASE_SKIPPED` | Scope excludes phase, or a forward jump passes over it | Timestamp, Phase, Scope, Reason | `tools/aidlc-utility.ts intent-create` (per-phase scope eval), `tools/aidlc-jump.ts execute` (forward jump) |
 
-### Stage Lifecycle (9 events)
+### Stage Lifecycle (10 events)
 
 | Event | When | Required Fields | Emitter |
 |-------|------|-----------------|---------|
@@ -247,7 +247,7 @@ record. A question in a questions file is digested entry by entry with its
 and Windows line endings change nothing. The ids are recorded only: nothing
 reads them to decide anything yet.
 
-### Unit Configuration and Lifecycle Events (9 events, unit-major Construction)
+### Unit Configuration and Lifecycle Events (12 events, unit-major Construction)
 
 The interactive twin of the swarm's `SWARM_UNIT_*` ledger. `UNIT_COMPLETED` is
 the completion receipt the engine's coverage walk prefers over bare artifact
